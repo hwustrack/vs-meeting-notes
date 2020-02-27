@@ -1,6 +1,6 @@
 # vs meeting notes
 
-A workflow for taking meeting notes.
+A workflow for taking meeting notes in VS Code.
 
 ## Features
 - Key binding to complete agenda items
