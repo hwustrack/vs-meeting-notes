@@ -2,12 +2,13 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { commands } from 'vscode';
+import { window } from 'vscode';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	let disposable = vscode.commands.registerCommand('extension.agendaItemDone', function () {
-		// Get the active text editor
+	let agendaItemDoneDisposable = vscode.commands.registerCommand('extension.agendaItemDone', function () {
+		// get the active text editor
 		let editor = vscode.window.activeTextEditor;
 
 		if (editor) {
@@ -34,6 +35,24 @@ export function activate(context: vscode.ExtensionContext) {
 			});
 		}
 	});
+	context.subscriptions.push(agendaItemDoneDisposable);
 
-	context.subscriptions.push(disposable);
+	let addActionItemDisposable = vscode.commands.registerCommand('extension.addActionItem', async function () {
+		const result = await window.showInputBox();
+		
+		// get the active text editor
+		let editor = vscode.window.activeTextEditor;
+
+		if (editor) {
+			let document = editor.document;
+
+			// append action item to end of document - assuming action items are at the end
+			let lastLine = document.lineAt(document.lineCount - 1);
+			editor.edit(editBuilder => {
+				editBuilder.replace(lastLine.range.end, '\r\n\- ' + result);
+			});
+		}
+	});
+
+	context.subscriptions.push(addActionItemDisposable);
 }

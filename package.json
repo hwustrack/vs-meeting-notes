@@ -10,14 +10,19 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.agendaItemDone"
+		"onCommand:extension.agendaItemDone",
+		"onCommand:extension.addActionItem"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "extension.agendaItemDone",
-				"title": "Agenda Item Done"
+				"title": "VS Meeting Notes: Agenda Item Done"
+			},
+			{
+				"command": "extension.addActionItem",
+				"title": "VS Meeting Notes: Add Action Item"
 			}
 		],
 		"keybindings": [
@@ -27,7 +32,10 @@
                 "mac": "cmd+d",
                 "when": "editorTextFocus && !editorReadonly && editorLangId == markdown"
 			}
-		]
+		],
+		"markdown.previewScripts": [
+			"./page.js"
+		  ]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
