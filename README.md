@@ -8,4 +8,4 @@ A workflow for taking meeting notes in VS Code.
 - Command to add action item
 
 ## Status
-This compliments the VS Notes extension pretty well. Considering merging these features into that extension.
+This compliments the [VS Notes](https://github.com/patleeman/VSNotes) extension pretty well. Considering merging these features into that extension.
